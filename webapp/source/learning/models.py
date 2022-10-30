@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-import uuid
 from django.urls import reverse
+import uuid
 
 # Create your models here.
 

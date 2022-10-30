@@ -230,7 +230,7 @@ def report(request):
     courses = Course.objects.all()
     groups = StudyGroup.objects.all()
     students = Student.objects.all()
-    print(StudyGroup.objects.get(number_group=4135).male_female())
+
     context = {
         'courses': courses,
         'groups': groups,

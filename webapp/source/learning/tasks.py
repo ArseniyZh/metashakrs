@@ -1,12 +1,7 @@
-import openpyxl
 import requests as r
-import uuid
 from celery import shared_task
 from django.conf import settings
-
-import os
-from openpyxl import load_workbook
-from .models import *
+import uuid
 
 CAT_URL = "http://thecatapi.com/api/images/get?format=src&type=gif"
 
