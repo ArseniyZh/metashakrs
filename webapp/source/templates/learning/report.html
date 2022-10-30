@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid text-center">
+        <br>
+        <p>Выполнить задачу с составлением отчета мне не удалось, поэтому предлагаю скачать рандомную гифку с котиком.</p>
+        <p>Котик скачается в source/reports </p>
+        <a href="{% url 'report_create' %}" class="btn btn-success">Скачать</a>
+        <br> <br>
+        <table class="table">
+            <tr><th>Нарпавление подготовки</th> <th>учебные дисциплины</th> <th>Куратор</th></tr>
+  
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course }}</td>
+                    <td>
+                        {% for subj in course.get_subjects  %}
+                            {{ subj }} <br>
+                        {% endfor %}
+                    </td>
+                    <td>{{ course.kurator }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <table class="table">
+            <tr><th>Номер группы</th> <th>ученики</th> <th>Количество мальчиков\девочек</th> <th>свободные места</th></tr>
+  
+            {% for group in groups %}
+                <tr>
+                    <td>{{ group }}</td>
+                    <td>
+                        {% for student in group.get_students  %}
+                            {{ student }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{ group.male_female }}</td>
+                    <td>{{ group.free_space }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

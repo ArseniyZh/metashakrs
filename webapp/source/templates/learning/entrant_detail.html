@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fliud text-center">
+        <h3>{{ entrant }}</h3>
+        <form action="{% url 'student_add' entrant.id %}" method="post">
+            {% csrf_token %}
+            <label class="form-label">Пол абитуриента</label> <br>
+            {{ form.sex }} <br>
+            <label class="form-label">Принять на обучение в группу</label> <br>
+            {{ form.group }} <br> <br>
+            <button type="submit" class="btn btn-success">Принять</button>
+        </form>
+    </div>
+{% endblock %}

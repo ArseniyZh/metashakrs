@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_staff %}
+        <div class="container-fluid">
+            <div class="container">
+                <form action="" method="post" class="form" name="form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <h5>Назначить куратора</h5>
+                        {{ form.person }} 
+                    <button type="submit" class="btn btn-primary">Назначить</button>
+                    </div>
+                </form>
+            </div>
+            {% for kurator in kurators %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ kurator }}</h5>
+                    <div class="text-right">
+                        <a href="{% url 'kurator_delete' kurator.id %}" class="card-link">Удалить</a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>Вы не имеете доступа к этой странице</h1>
+    {% endif %}
+{% endblock %}

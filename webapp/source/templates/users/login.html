@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Вы уже авторизованы</p>
+    {% else %}
+        <div class="container-fluid form">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <h1>Вход в учетную запись</h1>
+                  <label class="form-label">Имя пользователя</label> <br>
+                  {{ form.username }}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Пароль</label> <br>
+                  {{ form.password }}
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+                <a href="{% url 'sign_up' %} " class="btn btn-secondary">Зарегестрироваться</a>
+              </form>
+        </div>
+    {% endif %}
+{% endblock %}

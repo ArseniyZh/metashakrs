@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <h1>Редактирование учебнго курса "{{ course.name }}"</h1>
+            <label class="form-label">Название учебного курса</label> <br>
+            <input type="text" name="name" id="">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Учебные дисциплины</label> <br>
+            {{ form.subjects }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Куратор</label> <br>
+            {{ form.kurator }}
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+{% endblock %}

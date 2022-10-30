@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Вы уже авторизованы</p>
+    {% else %}
+        <div class="container-fluid form">
+            <form action="{% url 'sign_up' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <h1>Регистрация</h1>
+                  <label class="form-label">Имя пользователя</label> <br>
+                  {{ form.username }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Имя</label> <br>
+                    {{ form.first_name }}
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Фамилия</label> <br>
+                    {{ form.last_name }}
+                  </div>
+                <div class="mb-3">
+                  <label class="form-label">Пароль</label> <br>
+                  {{ form.password1 }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Повторите пароль</label> <br>
+                    {{ form.password2 }}
+                  </div>
+                <button type="submit" class="btn btn-primary">Зарегестрироваться</button>
+              </form>
+        </div>
+    {% endif %}
+{% endblock %}

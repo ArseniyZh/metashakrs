@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_staff %}
+        <div class="container-fluid">
+            <div class="container">
+                <form action="{% url 'course_new' %}" method="post" class="form" name="form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <h5>Добавить новый учебный курс</h5>
+                    <label class="form-label">Название</label> <br>
+                    <input type="text" name="name"> <br>
+                    <label class="form-label">Учебные дисциплины</label> <br>
+                    {{ form.subjects }} <br>
+                    <label class="form-label">Куратор</label> <br>
+                    {{ form.kurator }} 
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+            {{ form.error }}
+            {% for course in courses %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ course.name }}</h5>
+                    <div class="card-text">
+                        <p>Учебные дисциплины:</p>
+                        {% for subj in course.get_subjects %}
+                            <p>{{ subj.name }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card-text">
+                        <p>Куратор: {{ course.kurator }}</p>
+                    </div>
+                    <div class="text-right">
+                        <a href="{% url 'course_edit' course.id %}" class="card-link">Изменить</a>
+                        <a href="{% url 'course_delete' course.id %}" class="card-link">Удалить</a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% for course in courses %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.name }}</h5>
+                    <div class="card-text">
+                        <p>Учебные дисциплины:</p>
+                        {% for subj in course.get_subjects %}
+                            <p>{{ subj.name }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card-text">
+                        <p>Куратор: {{ course.kurator }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

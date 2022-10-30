@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.person.status == '2' %}
+        <div class="container-fluid">
+            <div class="container">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <h5>Создать группу</h5>
+                    <label class="form-label">Номер группы</label> <br>
+                    {{ form.number_group }}
+                    <label class="form-label">Направление подготовки</label> <br>
+                    {{ form.course }}
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+            {% for group in groups %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ group }}</h5>
+                    <div class="card-text">{{ group.course }}</div>
+                    <div class="text-right">
+                        <a href="{% url 'study_group_detail' group.id %}" class="card-link">Подробнее</a>
+                        <a href="{% url 'study_group_delete' group.id %}" class="card-link">Удалить</a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if user.person.status == '1' %}
+        {% for group in groups %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{ group }}</h5>
+                <div class="card-text">{{ group.course }}</div>
+                <div class="text-right">
+                    <a href="{% url 'study_group_detail' group.id %}" class="card-link">Подробнее</a>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

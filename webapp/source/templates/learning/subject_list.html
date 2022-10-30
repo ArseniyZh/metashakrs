@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_staff %}
+        <div class="container-fluid">
+            <div class="container">
+                <form action="{% url 'subject_new' %}" method="post" class="form" name="form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <h5>Добавить новую учебную дисциплину</h5>
+                    <label class="form-label">Название</label> <br>
+                    {{ form.name }} <br>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+            {{ form.error }}
+            {% for subj in subjects %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ subj.name }}</h5>
+                    <div class="text-right">
+                        <a href="{% url 'subject_edit' subj.id %}" class="card-link">Изменить</a>
+                        <a href="{% url 'subject_delete' subj.id %}" class="card-link">Удалить</a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>Вы не имеете доступа к этой странице</h1>
+    {% endif %}
+{% endblock %}

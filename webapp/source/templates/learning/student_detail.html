@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="containter-fluid text-center">
+        <h5>{{ student }}</h5>
+        <p>Студент группы: {{ student.group }}</p>
+        <p>Пол студента: {{ sex }}</p>
+        <br>
+        <form action="" method="post" class="form" name="form">
+            {% csrf_token %}
+            <div class="mb-3">
+                <h5>Изменить данные студента</h5>
+                <label class="form-label">Номер группы</label> <br>
+                {{ form.group }} <br>
+                <label class="form-label">Пол студента</label> <br>
+                {{ form.sex }} <br>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+        <br> <br>
+        <a href="{% url 'student_delete' student.id %}" class="btn btn-danger">Отчислить студента из группы '{{ student.group }}' и перенести его в список абитуриентов</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <h1>Редактирование учебной дисциплины "{{ subject.name }}"</h1>
+        <label class="form-label">Название учебной дисциплины</label> <br>
+        <input type="text" name="name" id="">
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+{% endblock %}

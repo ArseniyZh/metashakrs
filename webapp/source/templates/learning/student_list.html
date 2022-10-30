@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.person.status == '2' %}
+        <div class="container-fluid">
+            <div class="container text-center">
+                <h5>Абитуриенты</h5>
+                {% for entrant in entrants %}
+                    <p>{{ entrant }} <a href="{% url 'entrant_detail' entrant.id %}">Принять на обучение</a></p>
+                {% endfor %}
+                <h5>Студенты</h5>
+                {% for student in students %}
+                    {{ student }} - {{ student.group }} <a href="{% url 'student_detail' student.id %}">Подробнее</a><br>
+                {% endfor %}
+            </div>
+        
+        </div>
+    {% else %}
+        <h1>Вы не имеете доступа к этой странице</h1>
+    {% endif %}
+{% endblock %}
