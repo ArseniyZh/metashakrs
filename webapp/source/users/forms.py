@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
+# Форма логина юзера
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+# Форма регистрации юзера
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
